@@ -33,7 +33,8 @@ app.use(bodyParser.json());
 // ==========================================
 // 📈 YAHOO FINANCE REAL-TIME ENGINE
 // ==========================================
-const yahooFinance = require('yahoo-finance2').default;
+const YahooFinance = require('yahoo-finance2').default;
+const yahooFinance = new YahooFinance({ suppressNotices: ['yahooSurvey'] });
 
 // In-memory store for latest stock prices
 const latestPrices = {};

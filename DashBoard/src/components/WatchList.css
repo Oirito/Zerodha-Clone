@@ -1,63 +1,303 @@
-/* ACTION CONTAINER */
-.actions {
+/* ==========================================
+   🔍 MODERN SEARCH BAR
+   ========================================== */
+
+.search-container {
+  position: relative;
+  z-index: 100;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 8px 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 8px;
+}
+
+.search-wrapper:hover {
+  border-color: #dee2e6;
+  background: #fff;
+}
+
+.search-wrapper.focused {
+  border-color: #387ed1;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(56, 126, 209, 0.1);
+}
+
+.search-icon {
+  color: #adb5bd;
+  font-size: 20px !important;
+  transition: color 0.2s;
+}
+
+.search-wrapper.focused .search-icon {
+  color: #387ed1;
+}
+
+.search-wrapper .search {
+  flex: 1;
+  border: none !important;
+  outline: none;
+  font-size: 13px;
+  color: #333;
+  background: transparent;
+  padding: 4px 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.search-wrapper .search::placeholder {
+  color: #adb5bd;
+  font-weight: 400;
+}
+
+.search-clear {
+  color: #adb5bd;
+  font-size: 18px !important;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.search-clear:hover {
+  color: #666;
+  background: #e9ecef;
+}
+
+.counts {
+  font-size: 11px;
+  color: #868e96;
+  white-space: nowrap;
+  font-weight: 500;
+  padding-left: 8px;
+  border-left: 1px solid #e9ecef;
+}
+
+/* ==========================================
+   🔽 SEARCH DROPDOWN
+   ========================================== */
+
+.search-dropdown {
   position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+  max-height: 380px;
+  overflow-y: auto;
+  animation: dropdownSlide 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 6px;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-dropdown::-webkit-scrollbar-thumb {
+  background: #dee2e6;
+  border-radius: 3px;
+}
+
+.search-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #adb5bd;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  gap: 12px;
+}
+
+.search-result-item:hover {
+  background: #f0f7ff;
+}
+
+.search-result-item:hover .search-result-add {
+  color: #387ed1;
+  opacity: 1;
+}
+
+.search-result-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.search-result-symbol {
+  font-weight: 700;
+  font-size: 13px;
+  color: #212529;
+  letter-spacing: 0.5px;
+}
+
+.search-result-name {
+  font-size: 11px;
+  color: #868e96;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-result-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.search-result-sector {
+  font-size: 10px;
+  font-weight: 600;
+  color: #868e96;
+  background: #f1f3f5;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.search-result-price {
+  font-size: 13px;
+  font-weight: 600;
+  color: #495057;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.search-result-add {
+  color: #adb5bd;
+  font-size: 20px !important;
+  opacity: 0.5;
+  transition: all 0.2s;
+}
+
+.search-no-results {
+  padding: 24px 16px;
+  text-align: center;
+  color: #868e96;
+  font-size: 13px;
+}
+
+.search-no-results strong {
+  color: #495057;
+}
+
+/* ==========================================
+   ACTION CONTAINER (high specificity to override index.css)
+   ========================================== */
+.watchlist-container .list li .actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  background: linear-gradient(to right, transparent 0%, #f3f3f3 30%, #f3f3f3 100%);
+  z-index: 10;
+  box-sizing: border-box;
 }
 
 /* ROW ALIGNMENT */
-.actions-row {
+.watchlist-container .actions-row {
   display: flex;
   gap: 6px;
   align-items: center;
 }
 
 /* 🔘 COMMON TRANSITION */
-button {
+.watchlist-container .actions-row button {
   transition: all 0.2s ease-in-out;
+  width: auto;
+  height: auto;
 }
 
 /* 🩶 BUY */
-.buy {
-  background: #1976d2;   /* light grey */
+.watchlist-container .actions-row .buy {
+  background: #1976d2;
   color: white;
   border: none;
-  padding: 4px 8px;
-  border-radius: 3px;
+  padding: 5px 10px;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
 }
 
-
+.watchlist-container .actions-row .buy:hover {
+  background: #1565c0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+}
 
 /* 🩶 SELL */
-.sell {
+.watchlist-container .actions-row .sell {
   background: #f44336;
   color: white;
   border: none;
-  padding: 4px 8px;
-  border-radius: 3px;
+  padding: 5px 10px;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.watchlist-container .actions-row .sell:hover {
+  background: #d32f2f;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
 }
 
 /* 🩶 ICON BUTTONS */
-.action {
+.watchlist-container .actions-row .action {
   background: #e5e7eb;
   border: none;
   padding: 4px;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.action:hover {
+.watchlist-container .actions-row .action:hover {
   background: #cbd5e1;
+  transform: translateY(-1px);
 }
 
 /* COLORS */
 .up {
-  color: green;
+  color: #00c853;
 }
 
 .down {
-  color: red;
+  color: #ff1744;
 }
